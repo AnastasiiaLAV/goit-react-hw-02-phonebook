@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/goit-react-hw-02-phonebook/static/js/runtime~main.ccb55aeb.js"
   },
   {
-    "revision": "cedb4719f8092fbe69678b61fa8ccc48",
+    "revision": "f4e0953154c1067bec50da7c167a8962",
     "url": "/goit-react-hw-02-phonebook/index.html"
   }
 ];
