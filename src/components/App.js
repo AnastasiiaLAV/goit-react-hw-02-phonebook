@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 // import styled from 'styled-components';
 // import { nanoid } from 'nanoid';
-import ContactForm  from "./Form/Form";
+import ContactForm from "./Form/Form";
+import ContactList from "./ContactList/ContactList";
 
 
 export class App extends Component {
@@ -31,7 +32,7 @@ export class App extends Component {
 
   <h2>Contacts</h2>
   {/* <Filter/> */}
-  {/* <ContactList/> */}
+  <ContactList contacts={this.state.contacts}/>
       </div>
     )
   }
