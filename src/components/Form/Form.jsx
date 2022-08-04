@@ -1,25 +1,25 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-import { Formik, Form, Field } from 'formik';
+import PropTypes from 'prop-types';
+import { Formik} from 'formik';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
-    
+import { FormStyled, FieldStyled, Button } from './Form.styled';
 const id = nanoid(5);
 
 const SignupSchema = Yup.object().shape({
 name: Yup.string()
     .min(2, 'Too Short!')
-    .max(20, 'Too Long!')
+    .max(15, 'Too Long!')
     .required('Please enter a name')
     .matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/, "Must be only letters"),
 number: Yup.string()
-    .min(6, 'Too Short!')
+    .min(5, 'Too Short!')
     .max(10, 'Too Long!')
     .required('Please enter a number')
     .matches(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/, "Must be only digits"),
 });
 
-const ContactForm  = () => {
+const ContactForm  = ({addContact}) => {
     return (
         <Formik
             initialValues={{
@@ -27,16 +27,16 @@ const ContactForm  = () => {
                 number: '',
             }}
             validationSchema={SignupSchema}
-            onSubmit={(values, {resetForm}) => {
-                console.log(values);
-                resetForm ()
+            onSubmit={(value, { resetForm }) => {
+                addContact(value);
+                resetForm();
             }}
     >
 
     {({ errors, touched }) => (
-        <Form>
+        <FormStyled>
         <label htmlFor="name">Name</label>
-        <Field
+        <FieldStyled
             id={id}
             type="text"
             name="name"
@@ -46,7 +46,7 @@ const ContactForm  = () => {
         ) : null}
         
         <label htmlFor="number">Number</label>
-        <Field
+        <FieldStyled
             id={id}
             type="number"
             name="number"
@@ -55,11 +55,17 @@ const ContactForm  = () => {
             <div>{errors.number}</div>
         ) : null}
         
-        <button type="submit">Add contact</button>
-        </Form>
+        <Button type="submit">Add contact</Button>
+        </FormStyled>
     )}
     </Formik>
     )
 };
+
+ContactForm.propTypes = {
+    initialValues: PropTypes.object,
+    validationSchema: PropTypes.object,
+    onSubmit:PropTypes.func,
+}
 
 export default ContactForm;
